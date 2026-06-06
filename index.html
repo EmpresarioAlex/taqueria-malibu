@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taquería Malibú — Fuego y Sabor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Gilroy';
+      src: url('https://db.onlinewebfonts.com/t/1aaee8af8f37367d80f5b10a57532abb.woff2') format('woff2'),
+           url('https://db.onlinewebfonts.com/t/1aaee8af8f37367d80f5b10a57532abb.woff') format('woff');
+      font-weight: 700;
+      font-style: normal;
+    }
+  </style>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: rgb(244, 168, 60);
+      --orange: rgb(218, 58, 30);
+      --red: rgb(236, 67, 38);
+      --cream: rgb(248, 242, 227);
+      --white: rgb(251, 244, 229);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Archivo', sans-serif;
+      color: var(--cream);
+      overflow-x: hidden;
+      background: rgb(20, 13, 8);
+    }
+
+    /* ── VIDEO FONDO ── */
+    .bg-video-wrap {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+    }
+    .bg-video-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .bg-video-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.58);
+    }
+
+    /* ════════════════════════════════
+       SECCIÓN 1 — HERO
+    ════════════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      align-items: stretch;
+      min-height: 100vh;
+    }
+
+    /* LEFT */
+    .hero-left {
+      animation: fadeIn 1s ease both;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 60px 6vw;
+      gap: 32px;
+    }
+
+    .logo {
+      margin-bottom: 0;
+    }
+    .logo img {
+      height: 540px;
+      width: auto;
+      max-width: none;
+      mix-blend-mode: screen;
+      filter: brightness(0) invert(1);
+    }
+
+    .hero-tagline {
+      font-family: 'Anton', sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: clamp(2.8rem, 5vw, 4.8rem);
+      line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 0;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+
+    .hero-tagline .red { color: var(--red); }
+
+    .hero-sub1 {
+      font-family: 'Archivo', sans-serif;
+      font-size: clamp(0.85rem, 1.2vw, 1rem);
+      color: rgba(248,242,227,0.75);
+      margin-bottom: 0;
+      letter-spacing: 0.5px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .hero-sub2 {
+      font-family: 'Archivo', sans-serif;
+      font-size: clamp(0.8rem, 1.1vw, 0.95rem);
+      color: rgba(248,242,227,0.55);
+      margin-bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-direction: row;
+      gap: 14px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: 'Gilroy', 'Inter', sans-serif;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+      padding: 15px 34px;
+      border-radius: 3px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      transition: transform 0.22s, box-shadow 0.22s, background 0.22s;
+      cursor: pointer;
+    }
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-menu {
+      background: rgb(218, 58, 30);
+      color: #fff;
+      font-family: 'Archivo', sans-serif;
+      box-shadow: 0 4px 22px rgba(218,58,30,0.35);
+    }
+    .btn-menu:hover {
+      background: rgb(236, 67, 38);
+      box-shadow: 0 8px 30px rgba(218,58,30,0.5);
+    }
+
+    .btn-wa {
+      background: #25D366;
+      color: #fff;
+      font-family: 'Archivo', sans-serif;
+      box-shadow: 0 4px 22px rgba(37,211,102,0.3);
+    }
+    .btn-wa:hover {
+      background: #20c55d;
+      box-shadow: 0 8px 30px rgba(37,211,102,0.5);
+    }
+
+    /* RIGHT — VIDEO */
+    .hero-right {
+      display: flex;
+      align-items: stretch;
+      height: 100%;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    .video-float {
+      width: 100%;
+      height: 100%;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    .video-float video {
+      position: absolute;
+      top: 50%;
+      left: -6%;
+      width: 100vw;
+      height: auto;
+      transform: translateY(-50%);
+      mix-blend-mode: screen;
+      filter: contrast(1.1) brightness(1.15);
+      -webkit-mask-image:
+        linear-gradient(to right, transparent 0%, black 22%, black 100%),
+        linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%);
+      mask-image:
+        linear-gradient(to right, transparent 0%, black 22%, black 100%),
+        linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%);
+      -webkit-mask-composite: source-in;
+      mask-composite: intersect;
+      background: transparent;
+      border: 0;
+      outline: 0;
+      display: block;
+    }
+
+    /* ════════════════════════════════
+       SECCIÓN 2 — CARRUSEL
+    ════════════════════════════════ */
+    .carousel-section {
+      padding: 60px 0;
+      overflow: hidden;
+    }
+
+    .carousel-track-wrap {
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+    }
+
+    /* fade edges */
+    .carousel-track-wrap::before,
+    .carousel-track-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 180px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .carousel-track-wrap::before {
+      left: 0;
+      background: linear-gradient(to right, rgba(0,0,0,0.7), transparent);
+    }
+    .carousel-track-wrap::after {
+      right: 0;
+      background: linear-gradient(to left, rgba(0,0,0,0.7), transparent);
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 28px;
+      width: max-content;
+      animation: scrollLeft 28s linear infinite;
+    }
+
+    .carousel-track img {
+      height: 300px;
+      width: auto;
+      border-radius: 8px;
+      object-fit: cover;
+      flex-shrink: 0;
+      -webkit-mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 55%, transparent 90%);
+      mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 55%, transparent 90%);
+      filter: brightness(0.9);
+    }
+
+    @keyframes scrollLeft {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ════════════════════════════════
+       SECCIÓN 3 — ENCUÉNTRANOS
+    ════════════════════════════════ */
+    .contact {
+      padding: 90px 6vw 80px;
+    }
+
+    .contact-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-title {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 700;
+      font-size: clamp(2.8rem, 5vw, 4rem);
+      color: var(--gold);
+      margin-bottom: 60px;
+      letter-spacing: 1px;
+    }
+
+    .contact-phone {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      color: var(--white);
+      font-weight: 600;
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+    }
+    .contact-phone a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-phone a:hover { color: var(--gold); }
+
+    .contact-wa-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #25D366;
+      color: #fff;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 16px 40px;
+      border-radius: 3px;
+      text-decoration: none;
+      margin-bottom: 50px;
+      box-shadow: 0 4px 22px rgba(37,211,102,0.3);
+      transition: transform 0.22s, box-shadow 0.22s;
+    }
+    .contact-wa-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(37,211,102,0.5);
+    }
+
+    .contact-divider {
+      width: 50px;
+      height: 1px;
+      background: rgba(243,215,86,0.4);
+      margin: 0 auto 40px;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 50px;
+    }
+
+    .contact-info-item {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      color: var(--cream);
+      line-height: 1.6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .contact-info-item a {
+      color: var(--gold);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .contact-info-item a:hover { opacity: 0.75; }
+
+    .contact-info-item .icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .horario-label {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    /* Social */
+    .social-row {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 26px;
+      border: 1px solid rgba(243,215,86,0.3);
+      border-radius: 3px;
+      color: rgba(240,237,230,0.8);
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+    .social-link:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(243,215,86,0.06);
+    }
+    .social-link svg { flex-shrink: 0; }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 28px;
+      color: rgba(240,237,230,0.35);
+      font-size: 0.78rem;
+      font-family: 'Inter', sans-serif;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* ── BOTÓN WHATSAPP FLOTANTE ── */
+    .wa-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 999;
+      background: #25D366;
+      color: #fff;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+      text-decoration: none;
+      transition: transform 0.25s, box-shadow 0.25s;
+      animation: waPulse 2.5s infinite;
+    }
+    .wa-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 28px rgba(37,211,102,0.65);
+      animation: none;
+    }
+
+    /* ── ANIMACIONES ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(36px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes waPulse {
+      0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.45); }
+      50%       { box-shadow: 0 4px 36px rgba(37,211,102,0.75); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE MÓVIL ── */
+    @media (max-width: 768px) {
+      .hero {
+        min-height: 100vh;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr 1fr;
+        min-height: 100vh;
+      }
+
+      .hero-left {
+        padding: 40px 5vw 40px 5vw;
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+
+      .logo { margin-left: 40px; margin-top: -120px; }
+      .logo img { height: 200px; }
+
+      .hero-tagline {
+        font-size: clamp(1.8rem, 6vw, 2.4rem);
+        line-height: 1.1;
+        text-shadow: 0 2px 16px rgba(0,0,0,0.95);
+      }
+
+      .hero-sub1 {
+        font-size: 1.23rem;
+        text-shadow: 0 1px 10px rgba(0,0,0,0.95);
+      }
+      .hero-sub2 {
+        font-size: 1.13rem;
+        text-shadow: 0 1px 10px rgba(0,0,0,0.95);
+      }
+
+      .cta-row {
+        flex-direction: row;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: nowrap;
+      }
+
+      .btn {
+        padding: 13px 14px;
+        font-size: 0.95rem;
+        flex: 1;
+      }
+
+      .hero-right { overflow: visible; }
+      .video-float { min-height: 100vh; overflow: visible; }
+      .video-float video { left: -44%; }
+
+      .carousel-track img { height: 180px; }
+      .contact { padding: 60px 5vw 50px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Video de fondo -->
+  <div class="bg-video-wrap">
+    <video autoplay muted loop playsinline>
+      <source src="imagenes/fondo.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- ═══════════════════════════════
+       SECCIÓN 1 — HERO
+  ═══════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-grid">
+
+      <!-- Izquierda -->
+      <div class="hero-left">
+        <div class="logo">
+          <img src="imagenes/holaa.png" alt="Taquería Malibú">
+        </div>
+
+        <h1 class="hero-tagline">Fuego y <span class="red">sabor</span><br>en cada mordida.</h1>
+
+        <p class="hero-sub1">Tacos árabes, al pastor, asada y arrachera.</p>
+        <p class="hero-sub2">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Taquería poblana — Av. Juárez, Puebla
+        </p>
+
+        <div class="cta-row">
+          <a href="https://empresarioalex.github.io/menu-malibu" class="btn btn-menu" target="_blank">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>
+            Ver Menú
+          </a>
+          <a href="https://wa.me/522223811755" class="btn btn-wa" target="_blank">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Pedir por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Derecha — video flotante -->
+      <div class="hero-right">
+        <div class="video-float">
+          <video autoplay muted loop playsinline>
+            <source src="imagenes/trompo.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════
+       SECCIÓN 2 — CARRUSEL
+  ═══════════════════════════════ -->
+  <section class="carousel-section">
+    <div class="carousel-track-wrap">
+      <div class="carousel-track">
+        <!-- Imágenes x2 para loop continuo -->
+        <img src="imagenes/3.jpg" alt="Taquería Malibú">
+        <img src="imagenes/4.jpg" alt="Taquería Malibú">
+        <img src="imagenes/5.jpg" alt="Taquería Malibú">
+        <img src="imagenes/6.jpg" alt="Taquería Malibú">
+        <img src="imagenes/3.jpg" alt="Taquería Malibú">
+        <img src="imagenes/4.jpg" alt="Taquería Malibú">
+        <img src="imagenes/5.jpg" alt="Taquería Malibú">
+        <img src="imagenes/6.jpg" alt="Taquería Malibú">
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════
+       SECCIÓN 3 — ENCUÉNTRANOS
+  ═══════════════════════════════ -->
+  <section class="contact">
+    <div class="contact-inner">
+
+      <h2 class="contact-title reveal">Encuéntranos</h2>
+
+      <div class="contact-phone reveal">
+        <a href="tel:+522223811755">+52 222 381 1755</a>
+      </div>
+
+      <div style="margin-bottom: 30px;" class="reveal">
+        <a href="https://wa.me/522223811755" class="contact-wa-btn" target="_blank">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Ordenar por WhatsApp
+        </a>
+      </div>
+
+      <div class="contact-divider"></div>
+
+      <div class="contact-info reveal">
+        <div class="contact-info-item">
+          <span class="icon">📍</span>
+          <span>Av. Juárez 2318, Puebla —
+            <a href="https://maps.app.goo.gl/PwzafYrp6CYpHsHQ9" target="_blank">Ver en Google Maps</a>
+          </span>
+        </div>
+        <div class="contact-info-item">
+          <span class="icon">🕙</span>
+          <span><span class="horario-label">Lunes a sábado</span> &nbsp;10:00 am – 10:00 pm</span>
+        </div>
+      </div>
+
+      <div class="social-row reveal">
+        <a href="https://www.instagram.com/malibu_taqueria" class="social-link" target="_blank">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          Instagram
+        </a>
+        <a href="https://www.facebook.com/share/1ADmeyL6Yg/" class="social-link" target="_blank">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          Facebook
+        </a>
+        <a href="https://www.tiktok.com/@taqueria.malibu" class="social-link" target="_blank">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.05a8.16 8.16 0 004.77 1.52V7.12a4.85 4.85 0 01-1-.43z"/></svg>
+          TikTok
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    © 2025 Taquería Malibú · Av. Juárez 2318, Puebla · Todos los derechos reservados
+  </footer>
+
+  <!-- Botón WhatsApp flotante -->
+  <a href="https://wa.me/522223811755" class="wa-float" target="_blank" aria-label="WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script>
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
