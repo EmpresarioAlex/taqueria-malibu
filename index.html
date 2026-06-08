@@ -542,19 +542,13 @@
       }
 
       .hero-right { overflow: visible; }
-      .video-float { min-height: 100vh; overflow: visible; }
+      .video-float { min-height: 100vh; overflow: hidden; }
       .video-float video {
         left: -52%;
         width: 100vw;
         mix-blend-mode: screen;
-        -webkit-mask-image:
-          linear-gradient(to right, transparent 0%, black 20%, black 100%),
-          linear-gradient(to top, transparent 0%, black 18%, black 100%);
-        mask-image:
-          linear-gradient(to right, transparent 0%, black 20%, black 100%),
-          linear-gradient(to top, transparent 0%, black 18%, black 100%);
-        -webkit-mask-composite: source-in;
-        mask-composite: intersect;
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 100%);
+        mask-image: linear-gradient(to right, transparent 0%, black 20%, black 100%);
         filter: none;
       }
 
