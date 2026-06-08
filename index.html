@@ -204,14 +204,8 @@
       transform: translateY(-50%);
       mix-blend-mode: screen;
       filter: contrast(1.1) brightness(1.15);
-      -webkit-mask-image:
-        linear-gradient(to right, transparent 0%, black 28%, black 100%),
-        linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
-      mask-image:
-        linear-gradient(to right, transparent 0%, black 28%, black 100%),
-        linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
-      -webkit-mask-composite: source-in;
-      mask-composite: intersect;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 28%, black 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 28%, black 100%);
       background: transparent;
       border: 0;
       outline: 0;
