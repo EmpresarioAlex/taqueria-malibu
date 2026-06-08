@@ -542,13 +542,13 @@
       }
 
       .hero-right { overflow: visible; }
-      .video-float { min-height: 100vh; overflow: hidden; clip-path: inset(0); }
+      .video-float { min-height: 100vh; overflow: visible; }
       .video-float video {
-        left: -52%;
+        left: -44%;
         width: 100vw;
         mix-blend-mode: screen;
-        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 100%);
-        mask-image: linear-gradient(to right, transparent 0%, black 20%, black 100%);
+        -webkit-mask-image: none;
+        mask-image: none;
         filter: none;
       }
 
