@@ -687,9 +687,10 @@
     }
     if (isMobile) {
       // Mobile: HEVC alfa real (iOS Safari) → WebM alfa real (Android Chrome) → MP4 fallback
-      addSource('video/mp4; codecs="hvc1"', 'imagenes/trompo-mobile-hevc-v2.mov');
-      addSource('video/webm', 'imagenes/trompo-mobile-v2.webm');
-      addSource('video/mp4', 'imagenes/trompo-mobile-v2.mp4');
+      // v3 = full 720px (nitidez en pantallas retina)
+      addSource('video/mp4; codecs="hvc1"', 'imagenes/trompo-mobile-hevc-v3.mov');
+      addSource('video/webm', 'imagenes/trompo-mobile-v3.webm');
+      addSource('video/mp4', 'imagenes/trompo-mobile-v3.mp4');
     } else {
       // Desktop: WebM alfa (Chrome/Firefox) → HEVC alfa (Safari) → MP4 fallback
       addSource('video/webm', 'imagenes/trompo-v2.webm');
