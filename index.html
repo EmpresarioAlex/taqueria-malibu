@@ -533,7 +533,6 @@
       .video-float video {
         left: -44%;
         width: 100vw;
-        mix-blend-mode: screen;
       }
 
       .carousel-track img { height: 180px; }
@@ -680,30 +679,23 @@
     // Cargar video: HEVC alfa (Safari iOS/macOS) → WebM VP9 alfa (Chrome/Firefox) → MP4 fallback
     const trompoVideo = document.getElementById('trompo-video');
     const isMobile = window.innerWidth <= 768;
+    const V = '?v=2'; // cache-busting
+    function addSource(type, src) {
+      const s = document.createElement('source');
+      s.type = type;
+      s.src = src + V;
+      trompoVideo.appendChild(s);
+    }
     if (isMobile) {
-      // Mobile: WebM (Android Chrome) → MP4+screen blend (iOS Safari)
-      const webmSrc = document.createElement('source');
-      webmSrc.type = 'video/webm';
-      webmSrc.src = 'imagenes/trompo-mobile.webm';
-      const mp4Src = document.createElement('source');
-      mp4Src.type = 'video/mp4';
-      mp4Src.src = 'imagenes/trompo-mobile.mp4';
-      trompoVideo.appendChild(webmSrc);
-      trompoVideo.appendChild(mp4Src);
+      // Mobile: HEVC alfa real (iOS Safari) → WebM alfa real (Android Chrome) → MP4 fallback
+      addSource('video/mp4; codecs="hvc1"', 'imagenes/trompo-mobile-hevc.mov');
+      addSource('video/webm', 'imagenes/trompo-mobile.webm');
+      addSource('video/mp4', 'imagenes/trompo-mobile.mp4');
     } else {
-      // Desktop: WebM alfa real (Chrome/Firefox) → HEVC alfa (Safari) → MP4 fallback
-      const hevcSrc = document.createElement('source');
-      hevcSrc.type = 'video/mp4; codecs="hvc1"';
-      hevcSrc.src = 'imagenes/trompo-hevc.mov';
-      const webmSrc = document.createElement('source');
-      webmSrc.type = 'video/webm';
-      webmSrc.src = 'imagenes/trompo.webm';
-      const mp4Src = document.createElement('source');
-      mp4Src.type = 'video/mp4';
-      mp4Src.src = 'imagenes/trompo.mp4';
-      trompoVideo.appendChild(hevcSrc);
-      trompoVideo.appendChild(webmSrc);
-      trompoVideo.appendChild(mp4Src);
+      // Desktop: WebM alfa (Chrome/Firefox) → HEVC alfa (Safari) → MP4 fallback
+      addSource('video/webm', 'imagenes/trompo.webm');
+      addSource('video/mp4; codecs="hvc1"', 'imagenes/trompo-hevc.mov');
+      addSource('video/mp4', 'imagenes/trompo.mp4');
     }
     trompoVideo.load();
 
