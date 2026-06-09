@@ -554,7 +554,7 @@
       <!-- Izquierda -->
       <div class="hero-left">
         <div class="logo">
-          <img src="imagenes/holaa.png" alt="Taquería Malibú">
+          <img src="imagenes/holaa-v2.png" alt="Taquería Malibú" width="675" height="900" fetchpriority="high">
         </div>
 
         <h1 class="hero-tagline">Fuego y <span class="red">sabor</span><br>en cada mordida.</h1>
@@ -679,6 +679,8 @@
     // Cargar video: HEVC alfa (Safari iOS/macOS) → WebM VP9 alfa (Chrome/Firefox) → MP4 fallback
     const trompoVideo = document.getElementById('trompo-video');
     const isMobile = window.innerWidth <= 768;
+    // Póster ligero (WebP con alfa) visible al instante mientras carga el video
+    trompoVideo.poster = isMobile ? 'imagenes/trompo-poster-mobile.webp' : 'imagenes/trompo-poster.webp';
     function addSource(type, src) {
       const s = document.createElement('source');
       s.type = type;
