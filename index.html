@@ -680,20 +680,31 @@
     // Cargar video: HEVC alfa (Safari iOS/macOS) → WebM VP9 alfa (Chrome/Firefox) → MP4 fallback
     const trompoVideo = document.getElementById('trompo-video');
     const isMobile = window.innerWidth <= 768;
-    const base = isMobile ? 'imagenes/trompo-mobile' : 'imagenes/trompo';
-    const hevcFile = isMobile ? 'imagenes/trompo-mobile-hevc.mov' : 'imagenes/trompo-hevc.mov';
-    const hevcSrc = document.createElement('source');
-    hevcSrc.type = 'video/mp4; codecs="hvc1"';
-    hevcSrc.src = hevcFile;
-    const webmSrc = document.createElement('source');
-    webmSrc.type = 'video/webm';
-    webmSrc.src = base + '.webm';
-    const mp4Src = document.createElement('source');
-    mp4Src.type = 'video/mp4';
-    mp4Src.src = base + '.mp4';
-    trompoVideo.appendChild(hevcSrc);
-    trompoVideo.appendChild(webmSrc);
-    trompoVideo.appendChild(mp4Src);
+    if (isMobile) {
+      // Mobile: WebM (Android Chrome) → MP4+screen blend (iOS Safari)
+      const webmSrc = document.createElement('source');
+      webmSrc.type = 'video/webm';
+      webmSrc.src = 'imagenes/trompo-mobile.webm';
+      const mp4Src = document.createElement('source');
+      mp4Src.type = 'video/mp4';
+      mp4Src.src = 'imagenes/trompo-mobile.mp4';
+      trompoVideo.appendChild(webmSrc);
+      trompoVideo.appendChild(mp4Src);
+    } else {
+      // Desktop: WebM alfa real (Chrome/Firefox) → HEVC alfa (Safari) → MP4 fallback
+      const hevcSrc = document.createElement('source');
+      hevcSrc.type = 'video/mp4; codecs="hvc1"';
+      hevcSrc.src = 'imagenes/trompo-hevc.mov';
+      const webmSrc = document.createElement('source');
+      webmSrc.type = 'video/webm';
+      webmSrc.src = 'imagenes/trompo.webm';
+      const mp4Src = document.createElement('source');
+      mp4Src.type = 'video/mp4';
+      mp4Src.src = 'imagenes/trompo.mp4';
+      trompoVideo.appendChild(hevcSrc);
+      trompoVideo.appendChild(webmSrc);
+      trompoVideo.appendChild(mp4Src);
+    }
     trompoVideo.load();
 
     // Forzar autoplay en iOS Safari
