@@ -202,13 +202,6 @@
       width: 34vw;
       height: auto;
       transform: translateY(-50%);
-      mix-blend-mode: screen;
-      filter: contrast(1.1) brightness(1.15);
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 28%, black 100%);
-      mask-image: linear-gradient(to right, transparent 0%, black 28%, black 100%);
-      background: transparent;
-      border: 0;
-      outline: 0;
       display: block;
     }
 
@@ -540,10 +533,6 @@
       .video-float video {
         left: -44%;
         width: 100vw;
-        mix-blend-mode: screen;
-        -webkit-mask-image: none;
-        mask-image: none;
-        filter: none;
       }
 
       .carousel-track img { height: 180px; }
@@ -687,13 +676,18 @@
     );
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // Cargar video correcto según dispositivo
+    // Cargar video correcto según dispositivo — WebM (alfa real) con fallback MP4
     const trompoVideo = document.getElementById('trompo-video');
     const isMobile = window.innerWidth <= 768;
-    const src = document.createElement('source');
-    src.type = 'video/mp4';
-    src.src = isMobile ? 'imagenes/trompo-mobile.mp4' : 'imagenes/trompo.mp4';
-    trompoVideo.appendChild(src);
+    const base = isMobile ? 'imagenes/trompo-mobile' : 'imagenes/trompo';
+    const webmSrc = document.createElement('source');
+    webmSrc.type = 'video/webm';
+    webmSrc.src = base + '.webm';
+    const mp4Src = document.createElement('source');
+    mp4Src.type = 'video/mp4';
+    mp4Src.src = base + '.mp4';
+    trompoVideo.appendChild(webmSrc);
+    trompoVideo.appendChild(mp4Src);
     trompoVideo.load();
 
     // Forzar autoplay en iOS Safari
