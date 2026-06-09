@@ -705,7 +705,7 @@
     // Póster con alfa como capa ENCIMA del video. iOS muestra los videos con alfa
     // sin transparencia cuando están pausados (caja negra), p.ej. en Modo de Bajo
     // Consumo donde el autoplay no arranca. El póster cubre eso hasta que reproduce.
-    trompoPoster.src = isMobile ? 'imagenes/trompo-poster-mobile.webp' : 'imagenes/trompo-poster.webp';
+    trompoPoster.src = isMobile ? 'imagenes/trompo-poster-mobile-v2.webp' : 'imagenes/trompo-poster-v2.webp';
     function addSource(type, src) {
       const s = document.createElement('source');
       s.type = type;
@@ -736,6 +736,9 @@
     function detectAlphaSupport() {
       if (alphaChecked) return;
       if (!trompoVideo.videoWidth || !trompoVideo.videoHeight) return;
+      // Solo es fiable con el video REPRODUCIENDO: iOS muestra los videos con alfa
+      // como negro opaco cuando están pausados, lo que daría un falso positivo.
+      if (trompoVideo.paused || trompoVideo.currentTime <= 0) return;
       try {
         const c = document.createElement('canvas');
         c.width = trompoVideo.videoWidth;
@@ -760,11 +763,6 @@
         // Si el canvas falla por seguridad, no hacemos nada (mantenemos alfa real)
       }
     }
-    trompoVideo.addEventListener('loadeddata', detectAlphaSupport);
-    trompoVideo.addEventListener('playing', detectAlphaSupport);
-    setTimeout(detectAlphaSupport, 800);
-    setTimeout(detectAlphaSupport, 2000);
-
     // Ocultar el póster SOLO cuando el video está reproduciéndose de verdad.
     // 'timeupdate' garantiza que los frames avanzan (no basta 'playing'). Se da un
     // pequeño margen para que la detección de alfa aplique el respaldo si hace falta.
